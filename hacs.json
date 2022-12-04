@@ -1,7 +1,7 @@
 {
     "name": "Lovelace card for DHMZ weather forecast for Republic of Croatia - lovelace card",
     "render_readme": true,
-    "filename": "DHMZ-weather-card.js",
+    "filename": "dhmz-weather-card.js",
     "country": ["HR"],
     "homeassistant": "2021.12.0"
 }
