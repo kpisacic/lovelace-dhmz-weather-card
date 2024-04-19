@@ -86,15 +86,15 @@ class DhmzWeatherCard extends LitElement {
     this._hass = hass;
     this.lang = this._hass.selectedLanguage || this._hass.language;
     this.weatherObj = this.config.weather in hass.states ? hass.states[this.config.weather] : null;
+    //console.log(this.weatherObj);
     this.sunObj = 'sun.sun' in hass.states ? hass.states['sun.sun'] : null;
     this.tempObj = this.config.temp in hass.states ? hass.states[this.config.temp] : null;
-    var tmp_forecast = this.weatherObj.attributes.forecast.slice(0,29);
+    var tmp_forecast = this.weatherObj.attributes.forecast_list.slice(0,29);
     this.forecast = [];
     for (var i = 0; i < tmp_forecast.length; i+=2) {
       this.forecast.push(tmp_forecast[i]);
     }
     this.windBearing = this.weatherObj.attributes.wind_bearing;
-    //console.log(this.weatherObj);
     this.drawChart();
   }
 
@@ -283,14 +283,14 @@ class DhmzWeatherCard extends LitElement {
     }
   
     drawChart() {
-      var data = this.weatherObj.attributes.forecast.slice(0,29);
+      var data = this.weatherObj.attributes.forecast_list.slice(0,29);
       var locale = this._hass.selectedLanguage || this._hass.language;
       var tempUnit = this._hass.config.unit_system.temperature;
       var lengthUnit = this._hass.config.unit_system.length;
       var precipUnit = lengthUnit === 'km' ? this.ll('uPrecip') : 'in';
       var mode = this.mode;
       var i;
-      if (!this.weatherObj.attributes.forecast) {
+      if (!this.weatherObj.attributes.forecast_list) {
         return [];
       }
       var dateTime = [];
